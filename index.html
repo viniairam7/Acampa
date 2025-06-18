@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Locais de Acampamento SP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Acampamentos Disponíveis</h1>
+  <ul id="camp-list"></ul>
+  <button onclick="window.location.href='cadastro.html'">Cadastrar Participante</button>
+
+  <script>
+    const camps = [
+      { nome: "Acampamento Monte Sião", contato: "Telefone: (11) 99999-9999" },
+      { nome: "Acampamento Vale da Paz", contato: "Telefone: (11) 98888-8888" },
+      { nome: "Palavra da Vida", contato: "Telefone: (11) 97777-7777" }
+    ];
+
+    const campList = document.getElementById('camp-list');
+
+    camps.forEach(camp => {
+      const li = document.createElement('li');
+      li.textContent = camp.nome;
+      li.onclick = () => alert(camp.contato);
+      campList.appendChild(li);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cadastro de Participante</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Cadastro</h1>
+  <form id="cadastroForm">
+    <input type="text" placeholder="Nome" id="nome" required><br>
+    <input type="number" placeholder="Idade" id="idade" required><br>
+    <input type="text" placeholder="CPF" id="cpf" required><br>
+    <select id="genero" required>
+      <option>Masculino</option>
+      <option>Feminino</option>
+      <option>Outro</option>
+    </select><br>
+    <input type="text" placeholder="Cor do Time" id="corTime" required><br>
+    <button type="submit">Salvar</button>
+  </form>
+  <button onclick="exportCSV()">Exportar Planilha</button>
+  <button onclick="window.location.href='index.html'">Voltar</button>
+
+  <script>
+    let participantes = [];
+
+    document.getElementById('cadastroForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nome = document.getElementById('nome').value;
+      const idade = document.getElementById('idade').value;
+      const cpf = document.getElementById('cpf').value;
+      const genero = document.getElementById('genero').value;
+      const corTime = document.getElementById('corTime').value;
+
+      participantes.push({ nome, idade, cpf, genero, corTime });
+      alert("Participante salvo!");
+      this.reset();
+    });
+
+    function exportCSV() {
+      let csv = "Nome,Idade,CPF,Gênero,Cor do Time\n";
+      participantes.forEach(p => {
+        csv += `${p.nome},${p.idade},${p.cpf},${p.genero},${p.corTime}\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'participantes.csv';
+      a.click();
+    }
+  </script>
+</body>
+</html>
